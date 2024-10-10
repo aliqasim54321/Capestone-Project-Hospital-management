@@ -29,92 +29,28 @@ const Testimonial = () => {
           },
         }}
       >
-
-        <SwiperSlide>
-          <div className="py-[30px] px-5 rounded-3">
-            <div className="flex items-center gap-[13px]">
-              <img className="w-[52px]" src={patientAvatar} alt="" />
-              <div>
-                <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Ali Qasim
-                </h4>
-                <div className="flex items-center gap-[2px]">
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
+        {[...Array(4)].map((_, index) => (
+          <SwiperSlide key={index}>
+            <div className="py-[30px] px-5 rounded-3">
+              <div className="flex items-center gap-[13px]">
+                <img className="w-[52px]" src={patientAvatar} alt="" />
+                <div>
+                  <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
+                    Ali Qasim
+                  </h4>
+                  <div className="flex items-center gap-[2px]">
+                    {[...Array(5)].map((_, starIndex) => (
+                      <HiStar key={starIndex} className="text-yellowColor w-[18px] h-5" />
+                    ))}
+                  </div>
                 </div>
               </div>
+              <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?
+              </p>
             </div>
-
-            <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="py-[30px] px-5 rounded-3">
-            <div className="flex items-center gap-[13px]">
-              <img className="w-[52px]" src={patientAvatar} alt="" />
-              <div>
-                <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Ali Qasim
-                </h4>
-                <div className="flex items-center gap-[2px]">
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="py-[30px] px-5 rounded-3">
-            <div className="flex items-center gap-[13px]">
-              <img className="w-[52px]" src={patientAvatar} alt="" />
-              <div>
-                <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Ali Qasim
-                </h4>
-                <div className="flex items-center gap-[2px]">
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="py-[30px] px-5 rounded-3">
-            <div className="flex items-center gap-[13px]">
-              <img className="w-[52px]" src={patientAvatar} alt="" />
-              <div>
-                <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Ali Qasim
-                </h4>
-                <div className="flex items-center gap-[2px]">
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                    <HiStar className="text-yellowColor w-[18px] h-5" />
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?</p>
-          </div>
-        </SwiperSlide>
-
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

@@ -71,7 +71,7 @@ const Home = () => {
         {/*Hero Content*/}
 
         <div className="flex justify-end">
-          <motion.div initial={{ x: "20vw" }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 35 }}>
+          <motion.div initial={{ x: "20vw" }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 21 }}>
             <img className="w-[591px]" src={heroImg01} alt="" />
           </motion.div>
         </div>
