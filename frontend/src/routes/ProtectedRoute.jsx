@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { authContext } from '../context/authContext.jsx';
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { token, role } = useContext(authContext);
+import { Navigate } from "react-router-dom";
 
-  const isAllowed = allowedRoles.includes(role);
-  const accessibleRoute = token && isAllowed ? children : <Navigate to='/login' replace={true} />;
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
+
+function ProtectedRoute({ children, allowedRoles }) {
+  const { token, role } = useContext(AuthContext);
+
+  const isRoleAllowed = allowedRoles.includes(role);
+  const accessibleRoute =
+    token && isRoleAllowed ? children : <Navigate to="/login" replace={true} />;
 
   return accessibleRoute;
-};
+}
 
 export default ProtectedRoute;

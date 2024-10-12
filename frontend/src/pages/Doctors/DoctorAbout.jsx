@@ -1,84 +1,67 @@
-import { formateDate } from "../../utils/formateDate";
+import { formatDate } from "../../utils/formatDate";
 
-const DoctorAbout = () => {
+/* eslint-disable react/prop-types */
+const DoctorAbout = ({ about, name, qualifications, experiences }) => {
   return (
     <div>
       <div>
-        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2">
+        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex gap-2 items-center">
           About of
           <span className="text-irisBlueColor font-bold text-[24px] leading-9">
-            Alfaz Ahmed
+            {name}
           </span>
         </h3>
-        <p className="text__para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis eius
-          assumenda corrupti at fugiat ipsum odio laudantium quisquam veritatis
-          consectetur velit illo ullam animi necessitatibus vero voluptatum fuga
-          consequuntur, aspernatur perspiciatis adipisci. Necessitatibus et non
-          sapiente sit distinctio, repellat illo totam perspiciatis, inventore
-          ex assumenda odit natus cumque saepe nostrum?
-        </p>
+        <p className="text__para">{about}</p>
       </div>
+
       <div className="mt-12">
-        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
+        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex gap-2 items-center">
           Education
         </h3>
         <ul className="pt-4 md:p-5">
-          <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
-            <div>
-              <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
-                {formateDate('12-04-2010')} - {formateDate('12-04-2012')}
-              </span>
-              <p className="text-[16px] leading-6 font-medium text-textColor">
-                PHD in Surgeon
+          {qualifications?.map((item, index) => (
+            <li
+              key={index}
+              className="flex sm:justify-between sm:items-end flex-col sm:flex-row  md:gap-5 mb-[30px]"
+            >
+              <div>
+                <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
+                  {formatDate(item.startingDate, { year: "numeric" })}-
+                  {formatDate(item.endingDate, { year: "numeric" })}
+                </span>
+                <p className="text-[16px] leading-6 font-medium text-textColor">
+                  {item.degree}
+                </p>
+              </div>
+              <p className="text-[14px] leading-6 font-medium text-textColor">
+                {item.university}
               </p>
-            </div>
-            <div className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </div>
-          </li>
-          <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
-            <div>
-              <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
-                {formateDate('11-08-2012')} - {formateDate('11-08-2014')}
-              </span>
-              <p className="text-[16px] leading-6 font-medium text-textColor">
-                PHD in Surgeon
-              </p>
-            </div>
-            <div className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
       </div>
+
       <div className="mt-12">
-        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
+        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex gap-2 items-center">
           Experience
         </h3>
-        <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5">
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("07-04-2010")} - {formateDate("08-13-2014")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr. Surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("07-04-2010")} - {formateDate("08-13-2014")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr. Surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
+        <ul className="pt-4 md:p-5 grid sm:grid-cols-2  gap-[30px]">
+          {experiences?.map((item, index) => (
+            <li key={index}>
+              <div className="p-4 rounded bg-[#fff9ea]">
+                <span className="text-yellowColor text-[15px] leading-6 font-semibold ">
+                  {formatDate(item.startingDate, { year: "numeric" })}-
+                  {formatDate(item.endingDate, { year: "numeric" })}
+                </span>
+                <p className="text-[16px] leading-6 font-medium text-headingColor mt-3">
+                  {item.position}
+                </p>
+                <p className="text-[14px] leading-6 font-medium text-textColor">
+                  {item.hospital}
+                </p>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

@@ -1,8 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo2 from './../../assets/images/logo2.png';
-import { RiLinkedinFill } from 'react-icons/ri';
-import { AiFillYoutube, AiFillGithub, AiOutlineInstagram } from 'react-icons/ai';
+import logo2 from '../../assets/images/logo2.png';
+import { Link } from "react-router-dom";
+import { RiLinkedinFill } from "react-icons/ri";
+import {
+  AiFillYoutube,
+  AiFillGithub,
+  AiOutlineInstagram,
+} from "react-icons/ai";
 
 const socialLinks = [
   {
@@ -10,15 +13,15 @@ const socialLinks = [
     icon: <AiFillYoutube className="group-hover:text-white w-4 h-5" />,
   },
   {
-    path: "/",
+    path: "https://github.com/aliqasim54321",
     icon: <AiFillGithub className="group-hover:text-white w-4 h-5" />,
   },
   {
-    path: "/",
+    path: "https://www.instagram.com/aliqasim54321/",
     icon: <AiOutlineInstagram className="group-hover:text-white w-4 h-5" />,
   },
   {
-    path: "/",
+    path: "https://www.linkedin.com/in/aliqasim54321/",
     icon: <RiLinkedinFill className="group-hover:text-white w-4 h-5" />,
   },
 ];
@@ -29,43 +32,27 @@ const quickLinks01 = [
     display: "Home",
   },
   {
-    path: "/",
+    path: "/about-us",
     display: "About Us",
   },
   {
     path: "/services",
     display: "Services",
-  },
-  {
-    path: "/",
-    display: "Blog",
-  },
+  }
 ];
 
 const quickLinks02 = [
   {
-    path: "/find-a-doctor",
-    display: "Find a Doctor",
-  },
-  {
-    path: "/",
+    path: "/doctors",
     display: "Request an Appointment",
   },
   {
-    path: "/",
+    path: "/find-location", 
     display: "Find a Location",
-  },
-  {
-    path: "/",
-    display: "Get an Opinion",
   },
 ];
 
 const quickLinks03 = [
-  {
-    path: "/",
-    display: "Donate",
-  },
   {
     path: "/contact",
     display: "Contact Us",

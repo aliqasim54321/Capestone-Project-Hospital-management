@@ -46,7 +46,7 @@ const Testimonial = () => {
                 </div>
               </div>
               <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus, labore?
+              The doctors here are incredibly knowledgeable and caring. I always feel like I'm in safe hands.
               </p>
             </div>
           </SwiperSlide>
