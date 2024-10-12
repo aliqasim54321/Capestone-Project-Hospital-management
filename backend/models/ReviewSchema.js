@@ -26,38 +26,40 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// prevent duplicate review
+// reviewSchema.index({ doctor: 1, user: 1 }, { unique: true });
+
 reviewSchema.pre(/^find/, function (next) {
-    this.populate({
-      path: "user",
-      select: "name photo",
-    });
-  
-    next();
+  this.populate({
+    path: "user",
+    select: "name photo",
   });
 
-  // Calculate average ratings for doctor
+  next();
+});
+
 reviewSchema.statics.calcAverageRatings = async function (doctorId) {
-    // this points the current review
-    const stats = await this.aggregate([
-      {
-        $match: { doctor: doctorId },
+  const stats = await this.aggregate([
+    {
+      $match: { doctor: doctorId },
+    },
+    {
+      $group: {
+        _id: "$doctor",
+        numOfRating: { $sum: 1 },
+        avgRating: { $avg: "$rating" },
       },
-      {
-        $group: {
-          _id: "$doctor",
-          numOfRating: { $sum: 1 },
-          avgRating: { $avg: "$rating" },
-        },
-      },
-    ]);
-  
-    await Doctor.findByIdAndUpdate(doctorId, {
-        totalRating: stats[0].numOfRating,
-        averageRating: stats[0].avgRating,
-    });
-  };
-  
-  reviewSchema.post("save", function () {
-    this.constructor.calcAverageRatings(this.doctor);
+    },
+  ]);
+
+  await Doctor.findByIdAndUpdate(doctorId, {
+    totalRating: stats[0].numOfRating,
+    averageRating: stats[0].avgRating,
   });
+};
+
+reviewSchema.post("save", function () {
+  this.constructor.calcAverageRatings(this.doctor);
+});
+
 export default mongoose.model("Review", reviewSchema);

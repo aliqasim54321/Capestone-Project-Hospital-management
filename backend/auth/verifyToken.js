@@ -1,50 +1,49 @@
 import jwt from "jsonwebtoken";
-import Doctor from "../models/DoctorSchema.js";
-import User from "../models/UserSchema.js";
+import DoctorSchema from "../models/DoctorSchema.js";
+import UserSchema from "../models/UserSchema.js";
 
 export const authenticate = async (req, res, next) => {
-  // get token from headers
+  // Get token from header
   const authToken = req.headers.authorization;
 
-  // check token is exists
+  // Check if token exists
   if (!authToken || !authToken.startsWith("Bearer ")) {
-    return res
-      .status(401)
-      .json({ success: false, message: "No token, authorization denied" });
+    return res.status(401).json({ message: "No token, authorization denied" });
   }
 
   try {
+    // Verify token
     const token = authToken.split(" ")[1];
-
-    // verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     req.userId = decoded.id;
     req.role = decoded.role;
-
-    next(); // must be call the next function
+    next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {
-      return res.status(401).json({ message: "Token is expired" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Token has expired" });
     }
 
     return res.status(401).json({ success: false, message: "Invalid token" });
   }
 };
 
-export const restrict = (roles) => async (req, res, next) => {
+export const restrict = roles => async (req, res, next) => {
   const userId = req.userId;
 
   let user;
-
-  const patient = await User.findById(userId);
-  const doctor = await Doctor.findById(userId);
+  // Check the user's role and retrieve from the appropriate collection
+  const patient = await UserSchema.findById(userId);
+  const doctor = await DoctorSchema.findById(userId);
 
   if (patient) {
     user = patient;
-  }
-  if (doctor) {
+  } else if (doctor) {
     user = doctor;
+  } else {
+    return res.status(404).json({ message: "User not found" });
   }
 
   if (!roles.includes(user.role)) {
@@ -55,3 +54,12 @@ export const restrict = (roles) => async (req, res, next) => {
 
   next();
 };
+
+// Middleware to authenticate admin access
+export const adminAuth = restrict(["admin"]);
+
+// Middleware to restrict doctor access
+export const doctorAuth = restrict(["doctor"]);
+
+// Middleware to restrict patient access
+export const patientAuth = restrict(["patient", "admin"]);
