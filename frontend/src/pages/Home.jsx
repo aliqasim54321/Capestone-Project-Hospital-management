@@ -30,7 +30,9 @@ const Home = () => {
                 <p className="text__para">
                 At Medical Care, we are committed to providing exceptional healthcare services tailored to your individual needs. Whether it's a routine check-up or a specialized treatment, our team of dedicated professionals is here to support your wellness journey. Experience personalized care in a comfortable and compassionate environment.
                 </p>
-                <button className="btn rounded-[10px]">Request an Appointment </button>
+                <Link to="/doctors">
+                  <button className="btn rounded-[10px]">Request an Appointment</button>
+                </Link>
               </div>
 
               <div className="mt-[30px] lg:mt-[70px] flex flex-col md:flex-row lg:items-center gap-5 lg:gap-[30px]">
@@ -154,17 +156,8 @@ const Home = () => {
         <About />
       </section>
 
-      <section>
-        <div className="container">
-          <div className="xl:w-[470px] mx-auto">
-            <h2 className="heading text-center">Medical Services</h2>
-            <p className="text__para text-center">
-            Explore our wide range of healthcare services designed to meet all your medical needs. We are dedicated to providing top-quality care for every patient.
-            </p>
-          </div>
-
-          <ServicesList />
-        </div>
+      <section id="services">
+        <ServicesList />
       </section>
 
       <section>
@@ -186,7 +179,7 @@ const Home = () => {
                   3. Access your medical history and health records anytime, anywhere.
                 </li>
               </ul>
-              <Link to="/">
+              <Link to="/doctors">
                 <button className="btn rounded-[10px]">Learn More</button>
               </Link>
             </div>

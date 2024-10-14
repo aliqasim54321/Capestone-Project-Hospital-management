@@ -9,20 +9,20 @@ import {
 
 const socialLinks = [
   {
-    path: "/",
-    icon: <AiFillYoutube className="group-hover:text-white w-4 h-5" />,
+    path: "https://www.youtube.com/@rehaanoncam2419",
+    icon: <AiFillYoutube className="group-hover:text-blue w-4 h-5 " />,
   },
   {
     path: "https://github.com/aliqasim54321",
-    icon: <AiFillGithub className="group-hover:text-white w-4 h-5" />,
+    icon: <AiFillGithub className="group-hover:text-blue w-4 h-5" />,
   },
   {
     path: "https://www.instagram.com/aliqasim54321/",
-    icon: <AiOutlineInstagram className="group-hover:text-white w-4 h-5" />,
+    icon: <AiOutlineInstagram className="group-hover:text-blue w-4 h-5" />,
   },
   {
     path: "https://www.linkedin.com/in/aliqasim54321/",
-    icon: <RiLinkedinFill className="group-hover:text-white w-4 h-5" />,
+    icon: <RiLinkedinFill className="group-hover:text-blue w-4 h-5" />,
   },
 ];
 
@@ -77,7 +77,7 @@ const Footer = () => {
                 <Link
                   to={link.path}
                   key={index}
-                  className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                  className="w-9 h-9 rounded-full border border-solid border-[#181A1E] flex  items-center justify-center group hover:bg-[#0067FF] hover:border-none"
                 >
                   {link.icon}
                 </Link>

@@ -24,7 +24,7 @@ const About = () => {
             <p className="text__para mt-[30px]">
             Led by Dr. Sarah Connor, our Chief Doctor of Nursing, we continue to push the boundaries of healthcare excellence, creating a safe and welcoming environment for everyone. Your health is our priority, and we are here to support you every step of the way.
             </p>
-            <Link to="/">
+            <Link to="/find-location">
               <button className="btn rounded-[10px]">Learn More</button>
             </Link>
           </div>

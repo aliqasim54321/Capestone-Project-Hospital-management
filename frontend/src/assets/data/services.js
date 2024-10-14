@@ -7,7 +7,7 @@ export const services = [
   },
   {
     name: "Specialized Treatments",
-    desc: "Advanced medical care tailored to your specific needs.",
+    desc: "Advanced medical treatments at Medical Care, tailored to your specific needs.",
     bgColor: "#1F2B6C",
     textColor: "#BBFFF2", 
   },
