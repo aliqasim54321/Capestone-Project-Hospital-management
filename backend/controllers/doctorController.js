@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import Booking from "../models/BookingSchema.js";
 import Doctor from "../models/DoctorSchema.js";
 
@@ -6,6 +7,12 @@ export const updateDoctor = async (req, res) => {
   const id = req.params.id;
 
   try {
+    // Check if the password is being updated
+    if (req.body.password) {
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt);
+    }
+
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       id,
       {
@@ -22,7 +29,7 @@ export const updateDoctor = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "failed to update",
+      message: "Failed to update",
     });
   }
 };
@@ -103,11 +110,11 @@ export const getAllDoctor = async (req, res) => {
   }
 };
 
+// getDoctorProfile
 export const getDoctorProfile = async (req, res) => {
   const userId = req.userId;
 
   try {
-    // let user = null;
     const user = await Doctor.findById(userId);
 
     if (!user) {
@@ -120,7 +127,7 @@ export const getDoctorProfile = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully ",
+      message: "Successfully fetched profile",
       data: { ...rest, appointments },
     });
   } catch (error) {

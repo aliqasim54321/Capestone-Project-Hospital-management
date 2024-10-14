@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
 import Booking from "../models/BookingSchema.js";
 import Doctor from "../models/DoctorSchema.js";
 import User from "../models/UserSchema.js";
@@ -5,12 +6,21 @@ import User from "../models/UserSchema.js";
 // update User
 export const updateUser = async (req, res) => {
   const id = req.params.id;
+  let updatedFields = { ...req.body };
 
   try {
+    // Check if the password field is being updated
+    if (req.body.password) {
+      // Hash the new password before updating
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      updatedFields.password = hashedPassword; // Replace plain password with hashed one
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       id,
       {
-        $set: req.body,
+        $set: updatedFields,
       },
       { new: true }
     );
@@ -23,7 +33,7 @@ export const updateUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "failed to update",
+      message: "Failed to update",
     });
   }
 };
@@ -42,7 +52,7 @@ export const deleteUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "failed to delete",
+      message: "Failed to delete",
     });
   }
 };
@@ -99,13 +109,11 @@ export const getUserProfile = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Successfully ",
+      message: "Successfully retrieved user profile",
       data: { ...rest },
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, message: "Something went wrong! cannot get!" });
+    res.status(500).json({ success: false, message: "Something went wrong! Cannot get user profile." });
   }
 };
 
@@ -118,12 +126,12 @@ export const getMyAppointments = async (req, res) => {
       "-password"
     );
 
-    res.status(200).json({ success: true, message: "Success", data: doctors });
+    res.status(200).json({ success: true, message: "Appointments retrieved successfully", data: doctors });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Something went wrong! cannot get!",
+      message: "Something went wrong! Cannot retrieve appointments.",
     });
   }
 };
