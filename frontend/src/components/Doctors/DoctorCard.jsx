@@ -1,7 +1,6 @@
 import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import placeholder from "../../assets/images/placeholder.png";
 
 const DoctorCard = ({ doctor }) => {
   const {
@@ -9,14 +8,14 @@ const DoctorCard = ({ doctor }) => {
     averageRating = "N/A",
     totalRating = 0,
     specialization = "Specialization not specified",
-    photo = placeholder,
+    photo,
     experiences = [],
   } = doctor;
 
   return (
     <div className="p-3 lg:p-5 ">
       <div>
-        <img className="w-full" src={photo} alt={name} />
+        <img className="w-[350px] h-[350px]" src={photo} alt={name} />
       </div>
       <h2 className="text-[18px] leading-[30px] lg:text-[26px] lg:leading-9 font-[700] text-headingColor mt-3 lg:mt-5">
         {name}
