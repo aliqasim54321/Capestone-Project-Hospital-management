@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Doctor from "../models/DoctorSchema.js";
 
-// generate token
+// Placeholder image URL
+const placeholderImage = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
+
+// Generate token
 const generateToken = user => {
   return jwt.sign(
     { id: user._id, role: user.role },
@@ -19,8 +22,6 @@ export const registerUser = async (req, res) => {
     // Check if user already exists
     let user = null;
 
-    // const patient = await User.findOne({ email });
-    // const doctor = await Doctor.findOne({ email });
     if (role === "patient") {
       user = await User.findOne({ email });
     } else if (role === "doctor") {
@@ -31,9 +32,12 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // hashing password
+    // Hashing password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
+
+    // Set the default photo if none is provided
+    const userPhoto = photo || placeholderImage;
 
     // Create and save user based on the role
     if (role === "patient") {
@@ -41,7 +45,7 @@ export const registerUser = async (req, res) => {
         name,
         email,
         password: hashPassword,
-        photo,
+        photo: userPhoto,
         gender,
         role,
       });
@@ -51,7 +55,7 @@ export const registerUser = async (req, res) => {
         name,
         email,
         password: hashPassword,
-        photo,
+        photo: userPhoto,
         gender,
         role,
       });
@@ -60,7 +64,7 @@ export const registerUser = async (req, res) => {
     await user.save();
     res
       .status(200)
-      .json({ success: true, message: "user successfully created" });
+      .json({ success: true, message: "User successfully created" });
   } catch (err) {
     res
       .status(500)
@@ -91,11 +95,8 @@ export const login = async (req, res) => {
         .json({ success: false, message: "Invalid Credentials" });
     }
 
-    // check password
-    const isPasswordMatch = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
+    // Check password
+    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isPasswordMatch) {
       return res
         .status(400)
@@ -104,7 +105,7 @@ export const login = async (req, res) => {
 
     const { password, role, appointments, ...rest } = user._doc;
 
-    // get token
+    // Get token
     const token = generateToken(user);
 
     res.status(200).json({
