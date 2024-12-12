@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: true,
+  origin: https://medicalcare865.netlify.app,
 };
 
 app.get("/", (req, res) => {
