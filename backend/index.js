@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 
 // Fallback to React for unhandled routes
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.js"));
 });
 
 // Database connection
